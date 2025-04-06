@@ -4,9 +4,9 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from starlette import status
 
-from models.patientInsuranceModel import PatientInsurance
+from app.models.patientInsuranceModel import PatientInsurance
 
-from schemas.patientInsuranceSchema import (
+from app.schemas.patientInsuranceSchema import (
     PatientInsuranceCreateSchema,
     PatientInsuranceUpdateSchema,
     PatientInsuranceSchema)

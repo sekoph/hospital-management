@@ -2,8 +2,8 @@ from fastapi import FastAPI, Depends
 import uvicorn
 import webbrowser
 
-from api.endpoints.doctorSpecializationRoute import doctor_specalization_router
-from api.endpoints.doctorRoute import docter_router
+from app.api.endpoints.doctorSpecializationRoute import doctor_specalization_router
+from app.api.endpoints.doctorRoute import docter_router
 
 app = FastAPI()
 

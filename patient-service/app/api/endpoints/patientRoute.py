@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 from typing import List
 from fastapi import Depends
 
-from db.session import get_db
+from app.db.session import get_db
 
 # import crud functions
-from crud.patientCrud import (
+from app.crud.patientCrud import (
     get_all_patients,
     create_patient,
     update_patient,
@@ -15,17 +15,20 @@ from crud.patientCrud import (
     )
 
 # immport schemas
-from schemas.patientSchema import (
+from app.schemas.patientSchema import (
     PatientSchema,
     PatientCreateSchema,
     PatientUpdateSchema)
 
 
+from app.security.authMiddleware import get_current_user
+
 
 
 patient_router = APIRouter(
     prefix="/patient",
-    tags=["Patients"]
+    tags=["Patients"],
+    dependencies=[Depends(get_current_user)]
 )
 
 

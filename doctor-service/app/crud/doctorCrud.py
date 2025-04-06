@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from starlette import status
 
-from models.doctorModel import Doctor
+from app.models.doctorModel import Doctor
 
 
-from schemas.doctorSchema import(
+from app.schemas.doctorSchema import(
         DoctorSchema,
         DocterCreateSchema,
         DoctorUpdateSchema

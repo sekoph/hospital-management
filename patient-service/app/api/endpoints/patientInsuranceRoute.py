@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 from typing import List
 from fastapi import Depends
 
-from db.session import get_db
+from app.db.session import get_db
 
 # import crud functions
-from crud.patientInsuranceCrud import (
+from app.crud.patientInsuranceCrud import (
     get_all_patients_insurances,
     create_patient_insurance,
     update_patient_insurance_info,
@@ -15,7 +15,7 @@ from crud.patientInsuranceCrud import (
 )
 
 # import schemas
-from schemas.patientInsuranceSchema import (
+from app.schemas.patientInsuranceSchema import (
     PatientInsuranceSchema,
     PatientInsuranceCreateSchema,
     PatientInsuranceUpdateSchema

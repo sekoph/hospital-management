@@ -3,9 +3,9 @@ from sqlalchemy.orm import Session
 from typing import List
 from fastapi import Depends
 
-from db.session import get_db
+from app.db.session import get_db
 
-from crud.doctorSpecializationCrud import (
+from app.crud.doctorSpecializationCrud import (
     get_all_doctor_specializations,
     create_doctor_specialization,
     get_doctor_specialization_by_id,
@@ -14,7 +14,7 @@ from crud.doctorSpecializationCrud import (
 )
 
 
-from schemas.doctorSpecializationSchema import (
+from app.schemas.doctorSpecializationSchema import (
     DoctorSpecializationSchema,
     DoctorSpecializationCreateSchema,
     DoctorSpecializationUpdateSchema

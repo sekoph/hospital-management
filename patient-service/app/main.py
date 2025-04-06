@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
-from api.endpoints.patientInsuranceRoute import patient_insurance_router
-from api.endpoints.patientRoute import patient_router
+from app.api.endpoints.patientInsuranceRoute import patient_insurance_router
+from app.api.endpoints.patientRoute import patient_router
 import uvicorn
 import webbrowser
 
