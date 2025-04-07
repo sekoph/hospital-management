@@ -19,6 +19,7 @@ class PatientSchema(BaseModel):
     is_active: bool
     date_created: datetime
     date_modified: Optional[date]
+    user_id: Annotated[UUID4, str]
     
     class Config:
         from_attributes = True
@@ -31,8 +32,9 @@ class PatientCreateSchema(BaseModel):
     phone_number: str
     date_of_birth: datetime
     is_active: Optional[bool]
-    date_created: datetime
-    date_modified: datetime
+    # date_created: datetime
+    # date_modified: datetime
+    user_id: Annotated[UUID4, str]
     
     class Config:
         from_attributes = True
@@ -46,8 +48,8 @@ class PatientUpdateSchema(BaseModel):
     phone_number: Optional[str] = None
     date_of_birth: Optional[date] = None
     is_active: Optional[bool] = None
-    # date_created: datetime
-    date_modified: Optional[date] = None
+    # date_modified: Optional[date] = None
+    user_id: Optional[Annotated[UUID4, str]] = None
 
     class Config:
         from_attributes = True

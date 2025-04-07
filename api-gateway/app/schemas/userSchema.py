@@ -21,8 +21,8 @@ class UserCreateSchema(BaseModel):
     role: str
     username: str
     password: str
-    # date_created: datetime
-    # date_modified: date
+    date_created: datetime
+    date_modified: date
 
     class Config:
         from_attributes = True
@@ -31,7 +31,7 @@ class UserUpdateSchema(BaseModel):
     role: Optional[str] = None
     username: Optional[str] = None
     password: Optional[str] = None
-    # date_modified: Optional[date] = None
+    date_modified: Optional[date] = None
     
     class config:
         from_attributes = True
@@ -49,7 +49,6 @@ class TokenDataSchema(BaseModel):
 
     class Config:
         from_attributes = True
-        
         
         
 class userLoginSchema(BaseModel):

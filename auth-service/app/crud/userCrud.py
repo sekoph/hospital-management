@@ -18,7 +18,7 @@ async def get_all_users(db: Session) -> List[UserSchema]:
 
 async def create_user(db: Session, user: UserCreateSchema) -> UserSchema:
     try:
-        user = User(username = user.username, hash_password=user.password, date_created=user.date_created, date_modified=user.date_modified)
+        user = User(username = user.username, hash_password=user.password, role=user.role)
         db.add(user)
         db.commit()
         schema = UserSchema.from_orm(user)

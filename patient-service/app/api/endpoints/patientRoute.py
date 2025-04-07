@@ -28,7 +28,7 @@ from app.security.authMiddleware import get_current_user
 patient_router = APIRouter(
     prefix="/patient",
     tags=["Patients"],
-    dependencies=[Depends(get_current_user)]
+    # dependencies=[Depends(get_current_user)]
 )
 
 

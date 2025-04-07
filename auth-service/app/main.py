@@ -2,22 +2,18 @@ from fastapi import FastAPI, Depends
 import uvicorn
 import webbrowser
 from fastapi.middleware.cors import CORSMiddleware
+from app.config.settings import settings
 
 from app.api.endpoints.userRoutes import user_router
 
 app = FastAPI()
 
-origin = [
-    "http://patient-hospital:8001",
-    "http://localhost:8002",
-    "http://localhost:8003",
-    "http://localhost:8004",
-]
+allowed_origins = settings.ALLOWED_ORIGINS
 
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origin,
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

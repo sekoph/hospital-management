@@ -15,6 +15,10 @@ class Settings:
     
     # security url
     TOKEN_URL = os.getenv("TOKEN_URL")
+    
+    # cors
+    ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", " ").split(",")
+
 
     # database
     POSTGRES_HOST = os.getenv("POSTGRES_HOST")

@@ -14,5 +14,5 @@ class Booking(Base):
     appointment_start = Column(Time, nullable=False)
     appointment_end = Column(Time, nullable=False)
     is_active = Column(Boolean, default=True, nullable=False)
-    date_created = Column(DateTime, default=func.now(), nullable=False)
-    date_modified = Column(DateTime, nullable=True)
+    date_created = Column(DateTime, server_default=func.now(), nullable=False)
+    date_modified = Column(DateTime, server_default=func.now(), onupdate=func.now())

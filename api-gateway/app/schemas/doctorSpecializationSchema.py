@@ -24,6 +24,8 @@ class DoctorSpecializationCreateSchema(BaseModel):
     specialization: str
     title: Optional[str]
     description: Optional[str]
+    date_created: datetime
+    date_modified: datetime
 
     class Config:
         from_attributes = True
@@ -32,6 +34,7 @@ class DoctorSpecializationUpdateSchema(BaseModel):
     specialization: Optional[str] = None
     title: Optional[str] = None
     description: Optional[str] = None
+    date_modified: Optional[datetime] = None
 
     class Config:
         from_attributes = True

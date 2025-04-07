@@ -18,8 +18,8 @@ class PatientInsurance(Base):
     coverage_start_date = Column(Date, nullable=True)
     coverage_end_date = Column(Date, nullable=True)
     is_active = Column(Boolean, default=True)
-    date_created =  Column(DateTime, default=func.now())
-    date_modified = Column(DateTime, nullable=True)
+    date_created =  Column(DateTime, server_default=func.now())
+    date_modified = Column(DateTime, server_default=func.now(), onupdate=func.now())
     
     # Define the relationship with Patient
     patients = relationship("Patient", back_populates="patient_insurance")

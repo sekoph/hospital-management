@@ -20,14 +20,17 @@ from app.db.session import get_db
 from app.crud.userCrud import (
     get_all_users,
     create_user,
-    update_user
+    update_user,
+    delete_user,
 )
 
 from app.schemas.userSchema import (
     UserSchema,
     UserCreateSchema,
     TokenSchema,
-    TokenDataSchema
+    TokenDataSchema,
+    userLoginSchema,
+    UserUpdateSchema
 )
 
 from app.config.settings import settings
@@ -66,7 +69,7 @@ async def create_user_router(user: UserCreateSchema, db: Session = Depends(get_d
     summary="Login a user",
     description="Login a user"
 )
-async def login_user_router(db: Session = Depends(get_db), form_data: OAuth2PasswordRequestForm = Depends()):
+async def login_user_router(form_data: userLoginSchema, db: Session = Depends(get_db)):
     user = await authenticate_user(db,form_data.username, form_data.password)
     if not user:
         raise HTTPException(
@@ -77,10 +80,9 @@ async def login_user_router(db: Session = Depends(get_db), form_data: OAuth2Pass
     access_token_expires = timedelta(minutes = ACCESS_TOKEN_EXPIRE_MINUTES)
     # subject = user.username + user.role
     access_token = await create_access_token(
-        data={"sub": user.username, "role": user.role}, expires_delta=access_token_expires
+        data={"sub": user.username, "role": user.role, "id": str(user.id)}, expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}
-
 
 @user_router.get(
     "/me",
@@ -94,3 +96,36 @@ async def read_logged_in_user(current_user: User = Depends(get_current_user)):
         return current_user
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
+    
+    
+@user_router.get(
+    "/users",
+    response_model=List[UserSchema],
+    status_code=200,
+    summary="Get all users",
+    description="Get all users"
+)
+async def get_users(db: Session = Depends(get_db)):
+    return await get_all_users(db)
+
+
+@user_router.patch(
+    "/users/{user_id}",
+    response_model=UserSchema,
+    status_code=200,
+    summary="Update a user",
+    description="Update a user"
+)
+async def update_user_router(user_id: str, user: UserUpdateSchema, db: Session = Depends(get_db)):
+    return await update_user(db, user_id, user)
+
+@user_router.delete(
+    "/users/{user_id}",
+    status_code=200,
+    summary="Delete a user",
+    description="Delete a user"
+)
+async def delete_user_router(user_id: str, db: Session = Depends(get_db)):
+    deleted_user = await delete_user(user_id=user_id, db=db)
+    if deleted_user:
+        return {"message" : "User deleted successfully"}

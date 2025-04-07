@@ -30,7 +30,8 @@ class DocterCreateSchema(BaseModel):
     username: str
     phone_number: str
     is_active: Optional[bool]
-    user_id: Annotated[UUID4, str]
+    date_created: datetime
+    date_modified: datetime
 
     class Config:
         from_attributes = True
@@ -43,7 +44,7 @@ class DoctorUpdateSchema(BaseModel):
     username: Optional[str] = None
     phone_number: Optional[str] = None
     is_active: Optional[bool] = None
-    user_id: Optional[Annotated[UUID4, str]] = None
+    date_modified: Optional[datetime] = None
     
     class Config:
         from_attributes = True

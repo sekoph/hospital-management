@@ -29,6 +29,8 @@ class BookingCreateSchema(BaseModel):
     appointment_start: time
     appointment_end: time
     is_active: Optional[bool]
+    date_created: datetime
+    date_modified: Optional[datetime]
 
     class Config:
         from_attributes = True
@@ -41,3 +43,4 @@ class BookingUpdateSchema(BaseModel):
     appointment_start: Optional[time] = None
     appointment_end: Optional[time] = None
     is_active: Optional[bool] = None
+    date_modified: Optional[datetime] = None

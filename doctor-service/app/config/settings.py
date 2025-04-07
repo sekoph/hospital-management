@@ -12,6 +12,9 @@ class Settings:
     SECRET_KEY = os.getenv("SECRET_KEY")
     ALGORITHM = os.getenv("ALGORITHM")
     ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
+    
+    # cors
+    ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", " ").split(",")
 
     # database
     POSTGRES_HOST = os.getenv("POSTGRES_HOST")

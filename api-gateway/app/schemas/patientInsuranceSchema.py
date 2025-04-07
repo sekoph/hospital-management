@@ -32,8 +32,8 @@ class PatientInsuranceCreateSchema(BaseModel):
     coverage_start_date: Optional[date]
     coverage_end_date: Optional[date]
     is_active: Optional[bool]
-    # date_created: datetime
-    # date_modified: Optional[datetime]
+    date_created: datetime
+    date_modified: Optional[datetime]
     
     class Config:
         from_attributes = True
@@ -48,7 +48,7 @@ class PatientInsuranceUpdateSchema(BaseModel):
     coverage_start_date: Optional[date] = None
     coverage_end_date: Optional[date] = None
     is_active: Optional[bool] = None
-    # date_modified: Optional[datetime] = None
+    date_modified: Optional[datetime] = None
     
     class Config:
         from_attributes = True

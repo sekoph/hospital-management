@@ -18,8 +18,9 @@ class Patient(Base):
     phone_number = Column(String(100), nullable=True, unique=True)
     date_of_birth = Column(Date, nullable=True)
     is_active = Column(Boolean, default=True)
-    date_created =  Column(DateTime, default=func.now())
-    date_modified = Column(Date, nullable=True)
+    date_created =  Column(DateTime, server_default=func.now())
+    date_modified = Column(Date, server_default=func.now(), onupdate=func.now())
+    user_id = Column(UUID(True), nullable=False)
     
     # Define the relationship with PatientInsurance
     patient_insurance = relationship("PatientInsurance", back_populates="patients" , uselist=False)

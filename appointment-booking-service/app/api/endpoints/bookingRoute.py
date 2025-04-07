@@ -6,7 +6,7 @@ from fastapi import Depends
 from app.db.session import get_db
 
 
-from crud.bookingCrud import (
+from app.crud.bookingCrud import (
     get_bookings,
     create_booking,
     update_booking,
@@ -14,7 +14,7 @@ from crud.bookingCrud import (
     delete_booking
 )
 
-from schemas.bookingSchema import (
+from app.schemas.bookingSchema import (
     BookingSchema,
     BookingCreateSchema,
     BookingUpdateSchema)

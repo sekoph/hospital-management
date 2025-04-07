@@ -11,8 +11,8 @@ class DoctorSpecialization(Base):
     specialization = Column(String(100), nullable=False)
     title = Column(String(100), nullable=True)
     description = Column(String(100), nullable=True)
-    date_created =  Column(DateTime, default=func.now(), nullable=False)
-    date_modified = Column(DateTime, nullable=True)
+    date_created =  Column(DateTime, server_default=func.now())
+    date_modified = Column(DateTime, server_defaule=func.now(), onupdate=func.now())
 
     # Define the relationship with Doctor
     doctors = relationship("Doctor", back_populates="doctor_specializations")
