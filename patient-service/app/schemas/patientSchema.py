@@ -25,12 +25,12 @@ class PatientSchema(BaseModel):
         from_attributes = True
     
 class PatientCreateSchema(BaseModel):
-    first_name: str
-    last_name: str
-    email: str
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[str] = None
     username: str
-    phone_number: str
-    date_of_birth: datetime
+    phone_number: Optional[str] = None
+    date_of_birth: Optional[date] = None
     is_active: Optional[bool]
     # date_created: datetime
     # date_modified: datetime

@@ -23,12 +23,12 @@ class DoctorSchema(BaseModel):
         from_attributes = True
         
 class DocterCreateSchema(BaseModel):
-    specialization_id: Annotated[UUID4, str]
-    first_name: str
-    last_name: str
-    email: str
+    specialization_id: Optional[Annotated[UUID4, str]] = None
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    email: Optional[str] = None
     username: str
-    phone_number: str
+    phone_number: Optional[str] = None
     is_active: Optional[bool]
     user_id: Annotated[UUID4, str]
 

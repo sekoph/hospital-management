@@ -5,8 +5,18 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.config.settings import settings
 import uvicorn
 import webbrowser
+import asyncio
+from app.kafka.consumer.patientConsumer import PatientConsumer
+from app.db.session import session_local
 
 app = FastAPI()
+
+@app.on_event("startup")
+async def startup_event():
+    db_session = session_local()
+    patient_kafka_consumer = PatientConsumer(bootstrap_servers=settings.bootstrap_servers, db=db_session)
+    asyncio.create_task(patient_kafka_consumer.start())
+
 
 allowed_origins = settings.ALLOWED_ORIGINS
 

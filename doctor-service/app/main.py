@@ -3,12 +3,24 @@ import uvicorn
 import webbrowser
 from fastapi.middleware.cors import  CORSMiddleware
 from app.config.settings import settings
+from app.kafka.consumer.docterConsumer import DocterConsumer
+from app.db.session import session_local
+from fastapi import Depends
+from sqlalchemy.orm import Session
+import asyncio
 
 from app.api.endpoints.doctorSpecializationRoute import doctor_specalization_router
 from app.api.endpoints.doctorRoute import docter_router
 
 app = FastAPI()
 
+@app.on_event("startup")
+async def startup_event():
+    db_session = session_local()
+    docter_kafka_consumer = DocterConsumer(bootstrap_servers=settings.bootstrap_servers, db =db_session )
+    asyncio.create_task(docter_kafka_consumer.start())
+    
+    
 allowed_origins = settings.ALLOWED_ORIGINS
 
 app.add_middleware(

@@ -8,7 +8,7 @@ class Doctor(Base):
     __tablename__ = "doctors"
 
     id = Column(UUID(True), primary_key=True, default=uuid.uuid4, nullable=False)
-    specialization_id = Column(UUID(True), ForeignKey("doctor_specializations.id", ondelete="CASCADE"), nullable=False)
+    specialization_id = Column(UUID(True), ForeignKey("doctor_specializations.id", ondelete="CASCADE"), nullable=True)
     first_name = Column(String(100), nullable=True)
     last_name = Column(String(100), nullable=True)
     email = Column(String(100), nullable=True, unique=True)
