@@ -35,6 +35,10 @@ from app.schemas.userSchema import (
 
 from app.config.settings import settings
 
+from app.kafka.producer.userProducer import UserProducer
+
+
+
 ACCESS_TOKEN_EXPIRE_MINUTES = settings.ACCESS_TOKEN_EXPIRE_MINUTES
 
 
@@ -43,6 +47,13 @@ user_router = APIRouter(
     tags=["Users endpoints"]
 )
 
+async def get_kafka_producer():
+    producer = UserProducer(bootstrap_servers=settings.bootstrap_servers)
+    await producer.start()
+    try:
+        yield producer
+    finally:
+        await producer.stop()
 
 @user_router.post(
     "/register_user",
@@ -51,7 +62,7 @@ user_router = APIRouter(
     summary="Create a user",
     description="Create a user"
 )
-async def create_user_router(user: UserCreateSchema, db: Session = Depends(get_db)):
+async def create_user_router(user: UserCreateSchema, producer: UserProducer = Depends(get_kafka_producer) ,db: Session = Depends(get_db)):
     # db_user = db.query(User).filter(User.username == user.username).first()
     db_user = await get_user_by_username(db, user.username)
 
