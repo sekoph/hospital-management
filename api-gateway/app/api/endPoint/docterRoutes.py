@@ -8,7 +8,7 @@ from app.core.customizedRouter import route
 
 from app.schemas.doctorSchema import (
     DocterCreateSchema,
-    DoctorUpdateSchema
+    DoctorUpdateSchema,
 )
 
 
@@ -30,7 +30,7 @@ app = APIRouter()
     post_processing_func=None,
     authentication_token_decoder='app.core.auth.decode_access_token',
     service_authorization_checker='app.core.auth.is_admin_user',
-    response_model='app.schemas.docterSchema.DoctorSchema',
+    response_model='app.schemas.doctorSchema.DoctorSchema',
     response_list=True
 )
 async def get_doctors(request: Request, response: Response):
@@ -47,7 +47,7 @@ async def get_doctors(request: Request, response: Response):
     post_processing_func=None,
     authentication_token_decoder='app.core.auth.decode_access_token',
     service_authorization_checker='app.core.auth.is_default_user',
-    response_model='app.schemas.docterSchema.DoctorSchema'
+    response_model='app.schemas.doctorSchema.DoctorSchema'
 )
 async def get_doctor(request: Request, response: Response, doctor_id: str):
     pass
@@ -62,7 +62,7 @@ async def get_doctor(request: Request, response: Response, doctor_id: str):
     post_processing_func=None,
     authentication_token_decoder='app.core.auth.decode_access_token',
     service_authorization_checker='app.core.auth.is_default_user',
-    response_model='app.schemas.docterSchema.DoctorSchema'
+    response_model='app.schemas.doctorSchema.DoctorSchema'
 )
 async def update_doctor(request: Request, response: Response, doctor_id: str, doctor: DoctorUpdateSchema):
     pass
@@ -77,7 +77,7 @@ async def update_doctor(request: Request, response: Response, doctor_id: str, do
     post_processing_func=None,
     authentication_token_decoder='app.core.auth.decode_access_token',
     service_authorization_checker='app.core.auth.is_default_user',
-    response_model='app.schemas.docterSchema.DoctorSchema'
+    response_model='app.schemas.doctorSchema.DoctorSchema'
 )
 async def create_doctor(request: Request, response: Response, doctor: DocterCreateSchema):
     pass
@@ -109,7 +109,7 @@ async def delete_doctor(request: Request, response: Response, doctor_id: str):
     post_processing_func=None,
     authentication_token_decoder='app.core.auth.decode_access_token',
     service_authorization_checker='app.core.auth.is_default_user',
-    response_model='app.schemas.docterSpecializationSchema.DoctorSpecializationSchema',
+    response_model='app.schemas.doctorSpecializationSchema.DoctorSpecializationSchema',
     response_list=True
 )
 async def get_doctor_specialities(request: Request, response: Response):
@@ -125,7 +125,7 @@ async def get_doctor_specialities(request: Request, response: Response):
     post_processing_func=None,
     authentication_token_decoder='app.core.auth.decode_access_token',
     service_authorization_checker='app.core.auth.is_default_user',
-    response_model='app.schemas.docterSpecializationSchema.DoctorSpecializationSchema'
+    response_model='app.schemas.doctorSpecializationSchema.DoctorSpecializationSchema'
 )
 async def get_doctor_speciality(request: Request, response: Response, doctor_specialization_id: str):
     pass
@@ -141,7 +141,7 @@ async def get_doctor_speciality(request: Request, response: Response, doctor_spe
     post_processing_func=None,
     authentication_token_decoder='app.core.auth.decode_access_token',
     service_authorization_checker='app.core.auth.is_default_user',
-    response_model='app.schemas.docterSpecializationSchema.DoctorSpecializationSchema'
+    response_model='app.schemas.doctorSpecializationSchema.DoctorSpecializationSchema'
 )
 async def update_doctor_speciality(request: Request, response: Response, doctor_specialization_id: str, doctor_specialization: DoctorSpecializationUpdateSchema):
     pass
@@ -156,7 +156,7 @@ async def update_doctor_speciality(request: Request, response: Response, doctor_
     post_processing_func=None,
     authentication_token_decoder='app.core.auth.decode_access_token',
     service_authorization_checker='app.core.auth.is_default_user',
-    response_model='app.schemas.docterSpecializationSchema.DoctorSpecializationSchema'
+    response_model='app.schemas.doctorSpecializationSchema.DoctorSpecializationSchema'
 )
 async def create_doctor_speciality(request: Request, response: Response, doctor_specialization: DoctorSpecializationCreateSchema):
     pass

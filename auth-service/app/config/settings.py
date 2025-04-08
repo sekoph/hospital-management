@@ -7,7 +7,7 @@ class Settings:
     
     # app details
     API_TITLE = os.getenv("APP_NAME")
-    bootstrap_servers=("localhost:9094")
+    bootstrap_servers=("kafka1-hospital:9092")
     
     # security
     SECRET_KEY = os.getenv("SECRET_KEY")

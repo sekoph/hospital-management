@@ -70,7 +70,13 @@ async def create_user_router(user: UserCreateSchema, producer: UserProducer = De
         raise HTTPException(status_code=400, detail="Username already exists")
     hashed_password = get_password_hash(user.password)
     user.password = hashed_password
-    return await create_user(db=db, user=user)
+    new_user = await create_user(db=db, user=user)
+    await producer.send_user_creation_event({
+        "user_id": str(new_user.id),
+        "username": new_user.username,
+        "role": new_user.role
+    })
+    return new_user
 
 
 @user_router.post(

@@ -1,4 +1,5 @@
-from aiokafka import AioKafkaConsumer
+from aiokafka import AIOKafkaConsumer
+from aiokafka.errors import KafkaError
 import json
 import asyncio
 from sqlalchemy.orm import Session
@@ -7,20 +8,25 @@ from app.models.doctorModel import Doctor
 
 class DocterConsumer:
     def __init__(self, bootstrap_servers, db: Session) :
-        self.consumer = AioKafkaConsumer(
-            "docter_creation",
+        self.consumer = AIOKafkaConsumer(
+            "doctor_creation",
             bootstrap_servers=bootstrap_servers,
-            group_id="docter_creation_group",
+            group_id="doctor_creation_group",
             value_deserializer=lambda m: json.loads(m.decode('utf-8'))
         )
         
         self.db = db
         
     async def start(self):
-        await self.consumer.start()
         try:
-            async for message in self.consumer:
-                await self.process_message(message.value)
+            await self.consumer.start()
+            while True:
+                try:
+                    async for message in self.consumer:
+                        await self.process_message(message.value)
+                except KafkaError as e:
+                    print(f"Kafka error: {e}, retrying...")
+                    await asyncio.sleep(5)
         finally:
             await self.consumer.stop()
 
@@ -32,7 +38,6 @@ class DocterConsumer:
                 new_docter = Doctor(
                     user_id=user_data['user_id'],
                     username=user_data['username'],
-                    role=user_data['role'],
                     is_active=True
                 )
                 self.db.add(new_docter)
